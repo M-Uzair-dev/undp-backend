@@ -8,14 +8,14 @@
 function calculateDaysSince(commissioningDate) {
   const commissioning = new Date(commissioningDate);
   const today = new Date();
-  
+
   // Reset time to start of day for accurate day calculation
   commissioning.setHours(0, 0, 0, 0);
   today.setHours(0, 0, 0, 0);
-  
+
   const diffTime = today.getTime() - commissioning.getTime();
   const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-  
+
   // Return 0 if commissioning date is in the future, minimum 1 day if same day
   return Math.max(0, diffDays);
 }
@@ -44,7 +44,7 @@ function calculateCO2Saved(woodKg) {
  * @returns {number} Number of trees saved
  */
 function calculateTreesSaved(woodKg) {
-  return woodKg / 1600; // 1600 kg = 1 tree
+  return woodKg / 500; // 1600 kg = 1 tree
 }
 
 /**
@@ -78,14 +78,14 @@ function calculateAllValues(commissioningDate) {
   const trees = calculateTreesSaved(woodKg);
   const area = calculateAreaSaved(trees);
   const credits = calculateCarbonCredits(co2Kg);
-  
+
   return {
     daysSinceCommissioning: days,
     woodSaved: woodKg.toFixed(2),
     co2Saved: co2Tons.toFixed(3), // in tCO2
     treesSaved: trees.toFixed(3),
     areaSaved: area.toFixed(6),
-    carbonCredits: credits.toFixed(3)
+    carbonCredits: credits.toFixed(3),
   };
 }
 
@@ -96,5 +96,5 @@ module.exports = {
   calculateTreesSaved,
   calculateAreaSaved,
   calculateCarbonCredits,
-  calculateAllValues
-}; 
+  calculateAllValues,
+};
